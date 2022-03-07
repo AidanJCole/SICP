@@ -16,6 +16,7 @@
 (define (divides? a b)
   (= (remainder b a) 0))
 
+
 (define (prime? n)
   (= n (smallest-divisor n)))
 
@@ -37,3 +38,20 @@
   (cond ((= times 0) true)
         ((fermat-test n) (fast-prime? n (- times 1)))
         (else false)))
+
+;ex 1.22
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (runtime)))
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (runtime) start-time))))
+(define (report-prime elapsed-time)
+  (display " *** ")
+  (display elapsed-time))
+
+(define (search-for-primes s e)
+  (cond ((even? s) (search-for-primes (+ s 1) e))
+        ((> s e))
+        (else (timed-prime-test s) (search-for-primes (+ s 2) e))))
