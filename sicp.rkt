@@ -96,7 +96,7 @@
           (else (* 4 (f (+ a (* k h)))))))
   (/ (* h (sum term 0 inc n)) 3))
 
-;excercise 1.31
+;excercise 1.31 a
 
 (define (product term a next b)
   (if (> a b)
@@ -110,3 +110,12 @@
 (define (pi-over-four n)
   (define (frac-next n) (/ (+ 2 (* 2 (truncate (/ (+ n 1) 2)))) (+ 3 (* 2(truncate (/ n 2))))))
   (product frac-next 0 inc n))
+
+; ex 1.31 b
+
+(define (iter-product term a next b)
+  (define (iter-prod total term a next b)
+    (if (> a b)
+        total
+        (iter-prod (* total (term a)) term (next a) next b)))
+  (iter-prod 1 term a next b))
