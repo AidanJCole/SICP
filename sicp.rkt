@@ -119,3 +119,14 @@
         total
         (iter-prod (* total (term a)) term (next a) next b)))
   (iter-prod 1 term a next b))
+
+; ex 1.32
+
+(define (accumulate combiner null-value term a next b)
+  (if (> a b)
+      null-value
+      (combiner (term a)
+                (accumulate combiner null-value term (next a) next b))))
+
+(define (acc-fac a)
+  (accumulate * 1 identity 1 inc a))
