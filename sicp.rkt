@@ -214,4 +214,8 @@
           next
           (try next))))
   (try first-guess))
+
+; Excercise 1.35
+
+(define golden-ration (fixed-point (lambda (x) (+ 1 (/ 1.0 x))) 1))
                 
