@@ -238,3 +238,23 @@
 
 ; takes 9 guesses
 ;(define x-to-x-is-1000-damped (fixed-point-print (lambda (x) (/ (+ x (/ (log 1000) (log x))) 2)) 2))
+
+; Excercise 1.37a
+
+(define (cont-frac n d k)
+  (define (cont-frac-iter n d k total)
+    (if (= 0 k)
+        total
+        (cont-frac-iter n d (- k 1) (/ (n k) (+ total (d k))))))
+  (cont-frac-iter n d k 0))
+
+;(cont-frac (lambda (x) 1.0) (lambda (x) 1.0) 11)
+
+(define (cont-frac-rec n d k)
+  (define (recur i)
+    (if (= k i)
+        (/ (n i) (d i))
+        (/ (n i) (+ (d i) (recur (+ 1 i))))))
+  (recur 1)
+
+  
