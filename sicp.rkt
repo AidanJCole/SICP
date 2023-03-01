@@ -263,3 +263,12 @@
                                       (* 2 (/ (+ x 1.0) 3))
                                       1.0)) k))
 
+; Excercise 1.39
+
+(define (tan-cf x k) (cont-frac
+                              (lambda (i) (if (= 1 i)
+                                                   x
+                                                   (- (* x x))))
+                              (lambda (i) (- (* i 2) 1.0))
+                              k))
+
