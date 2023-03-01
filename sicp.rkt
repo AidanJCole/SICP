@@ -255,6 +255,11 @@
     (if (= k i)
         (/ (n i) (d i))
         (/ (n i) (+ (d i) (recur (+ 1 i))))))
-  (recur 1)
+  (recur 1))
 
-  
+; Excercise 1.38
+
+(define (e-approx k) (cont-frac (lambda (x) 1.0) (lambda (x) (if (= (remainder (+ x 1) 3) 0)
+                                      (* 2 (/ (+ x 1.0) 3))
+                                      1.0)) k))
+
