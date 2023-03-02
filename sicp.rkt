@@ -305,3 +305,7 @@
 (define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c)))
 (define (cubic-zero a b c) (newtons-method (cubic a b c) 1))
 
+;Excercise 1.41
+
+(define (double x) (lambda (y) (x (x y))))
+
