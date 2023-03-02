@@ -340,3 +340,31 @@
 (define (nth-root x n)
   (fixed-point ((repeated average-damp (- n 1)) (lambda (y) (/ x (expt y (- n 1))))) 1.0))
 
+;Excercise 1.46
+
+(define (iterative-improve good-enough? improve)
+  (lambda (guess)
+    (define (iter-improve guess)
+      (if (good-enough? guess)
+          guess
+          (iter-improve (improve guess))))
+    (iter-improve guess)))
+
+(define (sqrt4 x)
+    ((iterative-improve (lambda (guess) (< (abs (- (square guess) x)) 0.001))
+                        (lambda (guess) (average guess (/ x guess)))) 1.0))
+
+(define tolerance .00001)
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
+(define (fixed-point2 f first-guess)
+  (define tolerance .00001)
+  ((iterative-improve (lambda (x) ((< (abs (- x (f x))) tolerance)))) first-guess)) 
