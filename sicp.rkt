@@ -354,17 +354,45 @@
     ((iterative-improve (lambda (guess) (< (abs (- (square guess) x)) 0.001))
                         (lambda (guess) (average guess (/ x guess)))) 1.0))
 
-(define tolerance .00001)
-(define (fixed-point f first-guess)
-  (define (close-enough? v1 v2)
-    (< (abs (- v1 v2)) tolerance))
-  (define (try guess)
-    (let ((next (f guess)))
-      (if (close-enough? guess next)
-          next
-          (try next))))
-  (try first-guess))
-
 (define (fixed-point2 f first-guess)
   (define tolerance .00001)
-  ((iterative-improve (lambda (x) ((< (abs (- x (f x))) tolerance)))) first-guess)) 
+  ((iterative-improve (lambda (x) ((< (abs (- x (f x))) tolerance)))) first-guess))
+
+; 2.1.1
+
+(define (make-rat n d)
+  (let ((g (gcd n d)))
+    (cons (/ n g) (/ d g))))
+
+(define (numer x) (car x))
+
+(define (denom x) (cdr x))
+
+(define (print-rat x)
+  (newline)
+  (display (numer x))
+  (display "/")
+  (display (denom x)))
+
+(define (add-rat x y)
+  (make-rat (+ (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+
+(define (sub-rat x y)
+  (make-rat (- (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+
+(define (mul-rat x y)
+  (make-rat (* (numer x) (numer y))
+            (* (denom x) (denom y))))
+
+(define (div-rat x y)
+  (make-rat (* (numer x) (denom y))
+            (* (denom x) (numer y))))
+
+(define (equal-rat? x y)
+  (= (* (numer x) (denom y))
+     (* (numer y) (denom x))))
+     
