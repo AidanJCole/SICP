@@ -361,7 +361,7 @@
 ; 2.1.1
 
 (define (make-rat n d)
-  (let ((g (gcd n d)))
+  (let ((g ((if (< d 0) - +) (abs (gcd n d)))))
     (cons (/ n g) (/ d g))))
 
 (define (numer x) (car x))
