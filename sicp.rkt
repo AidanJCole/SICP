@@ -1,6 +1,13 @@
 #lang sicp
 ;Comments
 
+(define (expt b n)
+  (cond ((= n 0) 1)
+        ((even? n) 
+         (square (expt b (/ n 2))))
+        (else 
+         (* b (expt b (- n 1))))))
+
 (define (even? n)
   (= (remainder n 2) 0))
 
@@ -327,4 +334,9 @@
   (lambda (x ) (/ (+ (f (+ x dx)) (f x) (f (- x dx))) 3)))
 
 (define (n-folded-smooth f n) (repeated (smooth f) n))
+
+;Excercise 1.45
+
+(define (nth-root x n)
+  (fixed-point ((repeated average-damp (- n 1)) (lambda (y) (/ x (expt y (- n 1))))) 1.0))
 
