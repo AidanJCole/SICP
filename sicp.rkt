@@ -309,3 +309,7 @@
 
 (define (double x) (lambda (y) (x (x y))))
 
+;Excercise 1.42
+
+(define (compose f g) (lambda (x) (f (g x))))
+
