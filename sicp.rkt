@@ -319,3 +319,12 @@
   (if (= n 1)
       f
       (compose f (repeated f (- n 1)))))
+
+;Excercise 1.44
+
+(define (smooth f)
+  (define dx .0001)
+  (lambda (x ) (/ (+ (f (+ x dx)) (f x) (f (- x dx))) 3)))
+
+(define (n-folded-smooth f n) (repeated (smooth f) n))
+
