@@ -112,7 +112,7 @@
          (product term (next a) next b))))
 
 (define (factorial a)
-    (product identity 1 inc a))
+  (product identity 1 inc a))
 
 (define (pi-over-four n)
   (define (frac-next n) (/ (+ 2 (* 2 (truncate (/ (+ n 1) 2)))) (+ 3 (* 2(truncate (/ n 2))))))
@@ -236,9 +236,9 @@
     (newline)
     (let ((next (f guess)))
       (if (close-enough? guess next)
-           next
-           (try next))))
-    (try first-guess))
+          next
+          (try next))))
+  (try first-guess))
 
 ; takes 35 guesses
 ;(define x-to-x-is-1000 (fixed-point-print (lambda (x) (/ (log 1000) (log x))) 2))
@@ -267,17 +267,17 @@
 ; Excercise 1.38
 
 (define (e-approx k) (cont-frac (lambda (x) 1.0) (lambda (x) (if (= (remainder (+ x 1) 3) 0)
-                                      (* 2 (/ (+ x 1.0) 3))
-                                      1.0)) k))
+                                                                 (* 2 (/ (+ x 1.0) 3))
+                                                                 1.0)) k))
 
 ; Excercise 1.39
 
 (define (tan-cf x k) (cont-frac
-                              (lambda (i) (if (= 1 i)
-                                                   x
-                                                   (- (* x x))))
-                              (lambda (i) (- (* i 2) 1.0))
-                              k))
+                      (lambda (i) (if (= 1 i)
+                                      x
+                                      (- (* x x))))
+                      (lambda (i) (- (* i 2) 1.0))
+                      k))
 
 ; 1.3.4 Procedures as returned values
 
@@ -300,13 +300,13 @@
   (fixed-point (transform g) guess))
 
 (define (sqrt2 x)
-    (fixed-point (average-damp (lambda (y) (/ x y)))
-                 1.0))
+  (fixed-point (average-damp (lambda (y) (/ x y)))
+               1.0))
 
 (define (sqrt3 x)
-    (fixed-point-of-transform (lambda (y) (- (square y) x))
-                              newton-transform
-                              1.0))
+  (fixed-point-of-transform (lambda (y) (- (square y) x))
+                            newton-transform
+                            1.0))
 ;Excercise 1.40
 
 (define (cubic a b c) (lambda (x) (+ (* x x x) (* a x x) (* b x) c)))
@@ -351,8 +351,8 @@
     (iter-improve guess)))
 
 (define (sqrt4 x)
-    ((iterative-improve (lambda (guess) (< (abs (- (square guess) x)) 0.001))
-                        (lambda (guess) (average guess (/ x guess)))) 1.0))
+  ((iterative-improve (lambda (guess) (< (abs (- (square guess) x)) 0.001))
+                      (lambda (guess) (average guess (/ x guess)))) 1.0))
 
 (define (fixed-point2 f first-guess)
   (define tolerance .00001)
@@ -395,4 +395,35 @@
 (define (equal-rat? x y)
   (= (* (numer x) (denom y))
      (* (numer y) (denom x))))
-     
+
+;Excercise 2.2
+
+(define (make-point x y)
+  (cons x y))
+
+(define (x-point p)
+  (car p))
+
+(define (y-point p)
+  (cdr p))
+
+(define (print-point p)
+  (newline)
+  (display "(")
+  (display(x-point p))
+  (display",")
+  (display (y-point p))
+  (display ")"))
+
+(define (make-segment start end)
+  (cons start end))
+
+(define (start-segment s)
+  (car s))
+
+(define (end-segment s)
+  (cdr s))
+
+(define (midpoint-segment s)
+  (make-point (/ (+ (x-point (start-segment s)) (x-point (end-segment s))) 2)
+              (/ (+ (y-point (start-segment s)) (y-point (end-segment s))) 2)))
