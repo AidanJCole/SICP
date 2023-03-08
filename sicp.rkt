@@ -427,3 +427,23 @@
 (define (midpoint-segment s)
   (make-point (/ (+ (x-point (start-segment s)) (x-point (end-segment s))) 2)
               (/ (+ (y-point (start-segment s)) (y-point (end-segment s))) 2)))
+
+;Excercise 2.3
+
+(define (perimeter-rect r)
+  (* 2 (+ (width-rect r) (height-rect r))))
+
+(define (area-rect r)
+  (* (width-rect r) (height-rect r)))
+
+; Rectangle is orthogonal to the x/y axis
+; p1 and p2 are points on opposite corners of the rectangle
+(define (make-rect p1 p2)
+  (cons p1 p2))
+
+(define (width-rect r)
+  (abs (- (x-point (car r)) (x-point (cdr r)))))
+
+(define (height-rect r)
+  (abs (- (y-point (car r)) (y-point (cdr r)))))
+
