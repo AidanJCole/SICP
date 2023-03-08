@@ -437,13 +437,13 @@
   (* (width-rect r) (height-rect r)))
 
 ; Rectangle is orthogonal to the x/y axis
-; p1 and p2 are points on opposite corners of the rectangle
-(define (make-rect p1 p2)
-  (cons p1 p2))
+; p1 is the origin of the rectangle
+(define (make-rect p1 width height)
+  (cons p1 (cons width height)))
 
 (define (width-rect r)
-  (abs (- (x-point (car r)) (x-point (cdr r)))))
+  (abs (car (cdr r))))
 
 (define (height-rect r)
-  (abs (- (y-point (car r)) (y-point (cdr r)))))
+  (abs (cdr (cdr r))))
 
