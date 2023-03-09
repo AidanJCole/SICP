@@ -449,12 +449,28 @@
 
 ;Excercise 2.4
 
+;(define (cons x y)
+;  (lambda (m) (m x y)))
+
+;(define (car z)
+;  (z (lambda (p q) p)))
+
+;(define (cdr z)
+;  (z (lambda (p q) q)))
+
+;Excercise 2.5
+
 (define (cons x y)
-  (lambda (m) (m x y)))
+  (* (expt 2 x) (expt 3 y)))
 
-(define (car z)
-  (z (lambda (p q) p)))
+(define (car p)
+  (if (= (remainder p 2) 0)
+      (+ (car (/ p 2)) 1)
+      0))
 
-(define (cdr z)
-  (z (lambda (p q) q)))
+(define (cdr p)
+  (if (= (remainder p 3) 0)
+      (+ (cdr (/ p 3)) 1)
+      0))
 
+   
