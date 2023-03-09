@@ -460,17 +460,31 @@
 
 ;Excercise 2.5
 
-(define (cons x y)
-  (* (expt 2 x) (expt 3 y)))
+;(define (cons x y)
+;  (* (expt 2 x) (expt 3 y)))
 
-(define (car p)
-  (if (= (remainder p 2) 0)
-      (+ (car (/ p 2)) 1)
-      0))
+;(define (car p)
+;  (if (= (remainder p 2) 0)
+;      (+ (car (/ p 2)) 1)
+;      0))
 
-(define (cdr p)
-  (if (= (remainder p 3) 0)
-      (+ (cdr (/ p 3)) 1)
-      0))
+;(define (cdr p)
+;  (if (= (remainder p 3) 0)
+;      (+ (cdr (/ p 3)) 1)
+;      0))
 
-   
+;Excercise 2.6
+
+(define zero (lambda (f) (lambda (x) x)))
+
+(define (add-1 n)
+  (lambda (f) (lambda (x) (f ((n f) x)))))
+
+(define one (lambda (f) (lambda (x) (f x))))
+
+(define two (lambda (f) (lambda (x) (f (f x)))))
+
+(define (add a b)
+  (lambda (f)
+    (lambda (x)
+      ((a f) ((b f) x)))))
