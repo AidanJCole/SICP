@@ -508,3 +508,14 @@
                 (make-interval (/ 1.0 (upper-bound y))
                                (/ 1.0 (lower-bound y)))))
 
+; Excercise 2.7
+
+(define (make-interval a b)
+  (cons a b))
+
+(define (lower-bound i)
+  (car i))
+
+(define (upper-bound i)
+  (cdr i))
+
