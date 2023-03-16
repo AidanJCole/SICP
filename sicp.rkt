@@ -598,5 +598,35 @@
 (define (percent i)
   (* (/ (- (upper-bound i) (center i)) (center i)) 100))
 
+; Excercise 2.14
 
+(define (par1 r1 r2)
+  (div-interval (mul-interval r1 r2)
+                (add-interval r1 r2)))
+(define (par2 r1 r2)
+  (let ((one (make-interval 1 1))) 
+    (div-interval one
+                  (add-interval (div-interval one r1)
+                                (div-interval one r2)))))
 
+; 2.2.1
+
+(define (list-ref items n)
+  (if (= n 0)
+      (car items)
+      (list-ref (cdr items) (- n 1))))
+
+(define (length items)
+  (if (null? items)
+      0
+      (+ 1 (length (cdr items)))))
+
+(define (append list1 list2)
+  (if (null? list1)
+      list2
+      (cons (car list1) (append (cdr list1) list2))))
+
+;Excercise 2.17
+
+(define (last-pair items)
+  (list-ref items (- (length items) 1)))
