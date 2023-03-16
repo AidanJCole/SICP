@@ -626,7 +626,16 @@
       list2
       (cons (car list1) (append (cdr list1) list2))))
 
-;Excercise 2.17
+; Excercise 2.17
 
 (define (last-pair items)
   (list-ref items (- (length items) 1)))
+
+; Excercise 2.18
+
+(define (reverse items)
+  (define (iter items r)
+    (if (null? items)
+        r
+        (iter (cdr items) (cons (car items) r))))
+  (iter items nil))
