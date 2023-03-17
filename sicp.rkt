@@ -661,3 +661,13 @@
                         (first-denomination coin-values))
                      coin-values)))))
 
+;Excercise 2.20
+
+(define (same-parity s . r)
+  (define (recur s r)
+  (if (null? r)
+      r
+      (if (= (remainder s 2) (remainder (car r) 2))
+          (cons (car r) (recur s (cdr r)))
+          (recur s (cdr r)))))
+  (recur s r))
