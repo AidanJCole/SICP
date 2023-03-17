@@ -671,3 +671,16 @@
           (cons (car r) (recur s (cdr r)))
           (recur s (cdr r)))))
   (recur s r))
+
+(define (scale-list items factor)
+  (if (null? items)
+      nil
+      (cons (* (car items) factor)
+            (scale-list (cdr items) factor))))
+
+;Excercise 2.23
+
+(define (for-each f items)
+  (if (null? items)
+      #f
+      (and (f (car items)) (for-each f (cdr items)))))
