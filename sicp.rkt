@@ -713,3 +713,43 @@
           (else (cons x l))))
   (iter x nil))
 
+;Ex 2.29
+
+(define (make-mobile left right)
+  (list left right))
+
+(define (make-branch length structure)
+  (list length structure))
+
+(define (left-branch branch)
+  (car branch))
+
+(define (right-branch branch)
+  (car (cdr branch)))
+
+(define (branch-length branch)
+  (car branch))
+
+(define (branch-structure struct)
+  (car (cdr struct)))
+
+(define (total-weight mobile)
+  (+ (branch-weight (left-branch mobile)) (branch-weight (right-branch mobile))))
+
+(define (branch-weight branch)
+    (if (pair? (branch-structure branch))
+        (total-weight (branch-structure branch))
+        (branch-structure branch)))
+
+(define (balanced? mobile)
+  (let ((l (left-branch mobile))
+       (r (right-branch mobile)))
+  (and
+   (= (* (branch-length l) (branch-weight l)) (* (branch-length r) (branch-weight r)))
+   (if (pair? (branch-structure r))
+       (balanced? (branch-structure r))
+       #t)
+   (if (pair? (branch-structure l))
+       (balanced? (branch-structure l))
+       #t))))
+
