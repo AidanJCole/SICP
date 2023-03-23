@@ -703,3 +703,13 @@
             (iter (cdr items) (cons (deep-reverse (car items)) r))
             (iter (cdr items) (cons (car items) r)))))
   (iter x nil))
+
+;Ex 2.28
+
+(define (fringe x)
+  (define (iter x l)
+    (cond ((pair? x) (append (iter (car x) l) (iter (cdr x) l)))
+          ((null? x) l)
+          (else (cons x l))))
+  (iter x nil))
+
