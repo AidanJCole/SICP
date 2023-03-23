@@ -684,3 +684,22 @@
   (if (null? items)
       #f
       (and (f (car items)) (for-each f (cdr items)))))
+
+;Section 2.2.2
+
+(define (count-leaves x)
+  (cond ((null? x) 0)  
+        ((not (pair? x)) 1)
+        (else (+ (count-leaves (car x))
+                 (count-leaves (cdr x))))))
+
+;Ex 2.27
+
+(define (deep-reverse x)
+  (define (iter items r)
+    (if (null? items)
+        r
+        (if (pair? (car items))
+            (iter (cdr items) (cons (deep-reverse (car items)) r))
+            (iter (cdr items) (cons (car items) r)))))
+  (iter x nil))
