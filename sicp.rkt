@@ -753,3 +753,32 @@
        (balanced? (branch-structure l))
        #t))))
 
+;Mapping over trees
+
+(define (scale-tree tree factor)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (* tree factor))
+        (else (cons (scale-tree (car tree) factor)
+                    (scale-tree (cdr tree) factor)))))
+
+;(define (scale-tree tree factor)
+;  (map (lambda (sub-tree)
+;         (if (pair? sub-tree)
+;             (scale-tree sub-tree factor)
+;             (* sub-tree factor)))
+;       tree))
+
+;Ex 2.30
+
+(define (square-tree-rec tree)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (* tree tree))
+        (else (cons (square-tree-rec (car tree))
+                    (square-tree-rec (cdr tree))))))
+
+(define (square-tree-map tree)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+             (square-tree-map sub-tree)
+             (* sub-tree sub-tree)))
+       tree))
