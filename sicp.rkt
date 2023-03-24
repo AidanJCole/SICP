@@ -790,3 +790,12 @@
         ((not (pair? tree)) (f tree))
         (else (cons (tree-map f (car tree))
                     (tree-map f (cdr tree))))))
+
+;Ex 2.32
+
+(define (subsets s)
+  (if (null? s)
+      (list nil)
+      (let ((rest (subsets (cdr s))))
+        (append rest (map (lambda (r) (cons (car s) r)) rest)))))
+
