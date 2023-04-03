@@ -841,3 +841,26 @@
         ((not (pair? tree)) (list tree))
         (else (append (enumerate-tree (car tree))
                       (enumerate-tree (cdr tree))))))
+
+(define (sum-odd-squares-tree tree)
+  (accumulate +
+              0
+              (map square
+                   (filter odd?
+                           (enumerate-tree tree)))))
+
+(define (product-of-squares-of-odd-elements sequence)
+  (accumulate *
+              1
+              (map square
+                   (filter odd? sequence))))
+
+;Ex 2.33
+
+(define (map-acc p sequence)
+  (accumulater (lambda (x y) (cons (p x) y)) nil sequence))
+(define (append-acc seq1 seq2)
+  (accumulater cons seq2 seq1))
+(define (length-acc sequence)
+  (accumulater (lambda (x y) (inc y)) 0 sequence))
+
