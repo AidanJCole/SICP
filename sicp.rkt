@@ -864,3 +864,9 @@
 (define (length-acc sequence)
   (accumulater (lambda (x y) (inc y)) 0 sequence))
 
+;Ex. 2.34
+
+(define (horner-eval x coefficient-sequence)
+  (accumulater (lambda (this-coeff higher-terms) (+ (* higher-terms x) this-coeff))
+              0
+              coefficient-sequence))
